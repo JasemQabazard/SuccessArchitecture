@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark p-3">
+  <div class="container-fluid align-items-end">
+      <a routerLink="/" class="navbar-brand">
+      <div class="myLogo">
+          <h2 class="navbar-brand brand-name">
+              <img src="../../../assets/images/logo1.png">
+          </h2>
+      </div>
+      </a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-5">
+      <li class="nav-item px-0" [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/" class="nav-link">
+            <i class="fas fa-home"></i> Home
+          </a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{exact: true}">
+        <a routerLink="/blog" class="nav-link">
+          <i class="fab fa-blogger"></i> Blog
+        </a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{exact: true}">
+        <a routerLink="/market" class="nav-link">
+          <i class="fas fa-cart-arrow-down"></i> Market
+        </a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{exact: true}">
+        <a routerLink="/about" class="nav-link">
+          <i class="fas fa-info-circle"></i> About
+        </a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{exact: true}">
+        <a routerLink="/contact" class="nav-link">
+          <i class="fas fa-bullhorn"></i> Contact
+        </a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{exact: true}" *ngIf="USER">
+        <a routerLink="/register" class="nav-link">
+          <i class="fas fa-user"></i> Register
+        </a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{exact: true}" *ngIf="USER">
+        <a routerLink="/login" class="nav-link">
+          <i class="far fa-arrow-alt-circle-right"></i> Login
+        </a>
+      </li>
+      <li class="nav-item dropdown" [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{exact: true}" *ngIf="!USER">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+          <i class="fas fa-user-circle"></i> Welcome {{realname}}
+        </a>
+        <div class="dropdown-menu">
+          <a routerLink="/profile" class="dropdown-item" *ngIf="!USER">
+            <i class="fas fa-cogs"></i> Profile
+          </a>
+          <a routerLink="/settings" class="dropdown-item" *ngIf="ADMIN">
+            <i class="fas fa-cogs"></i> Settings
+          </a>
+          <a routerLink="/useramend" class="dropdown-item">
+            <i class="fas fa-user"></i> User Data Change
+          </a>
+          <a routerLink="/passwordchange" class="dropdown-item">
+            <i class="fas fa-angle-double-right"></i> Change Password
+          </a>
+        </div>
+      </li>
+      <li class="nav-item" *ngIf="!USER">
+          <a (click)="logOut()" class="nav-link" href="#">
+              <i class="fas fa-sign-out-alt"></i> LogOut
+          </a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
