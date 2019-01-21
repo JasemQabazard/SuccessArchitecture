@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ngsuccessarchitecture';
+  title = 'Success Architecture';
+  language = 'english';     // language = 'arabic'; subscription based on a service
 }

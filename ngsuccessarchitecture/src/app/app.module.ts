@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { AuthService } from './services/auth.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,6 +20,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { UseramendComponent } from './components/useramend/useramend.component';
 import { PasswordchangeComponent } from './components/passwordchange/passwordchange.component';
+import { AboutaComponent } from './components/abouta/abouta.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { PasswordchangeComponent } from './components/passwordchange/passwordcha
     ProfileComponent,
     SettingsComponent,
     UseramendComponent,
-    PasswordchangeComponent
+    PasswordchangeComponent,
+    AboutaComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,9 @@ import { PasswordchangeComponent } from './components/passwordchange/passwordcha
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

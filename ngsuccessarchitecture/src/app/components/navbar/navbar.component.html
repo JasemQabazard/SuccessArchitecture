@@ -32,7 +32,10 @@
       </li>
       <li class="nav-item" [routerLinkActive]="['active']"
       [routerLinkActiveOptions]="{exact: true}">
-        <a routerLink="/about" class="nav-link">
+        <a routerLink="/about" class="nav-link" *ngIf="userlanguage==='english'">
+          <i class="fas fa-info-circle"></i> About
+        </a>
+        <a routerLink="/abouta" class="nav-link" *ngIf="userlanguage==='arabic'">
           <i class="fas fa-info-circle"></i> About
         </a>
       </li>
@@ -80,6 +83,20 @@
           <a (click)="logOut()" class="nav-link" href="#">
               <i class="fas fa-sign-out-alt"></i> LogOut
           </a>
+      </li>
+      <li class="nav-item dropdown" [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{exact: true}">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+          <i class="fas fa-globe"></i> Language
+        </a>
+        <div class="dropdown-menu">
+          <a (click)="arabic()" class="dropdown-item">
+            <i class="fab fa-artstation"></i> Arabic
+          </a>
+          <a (click)="english()" class="dropdown-item">
+            <i class="fab fa-etsy"></i> English
+          </a>
+        </div>
       </li>
     </ul>
   </div>

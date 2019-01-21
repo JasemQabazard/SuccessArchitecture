@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { MarketComponent } from './components/market/market.component';
 import { AboutComponent } from './components/about/about.component';
+import { AboutaComponent } from './components/abouta/abouta.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'blog', component: BlogComponent},
   {path: 'market', component: MarketComponent},
   {path: 'about', component: AboutComponent},
+  {path: 'abouta', component: AboutaComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
