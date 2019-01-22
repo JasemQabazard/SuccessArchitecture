@@ -1,0 +1,78 @@
+.carousel-item {
+  height:625px;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.45;
+}
+
+.mastertitle {
+  margin-left: 100px;
+  color: #9b821e;
+}
+
+.preqimage {
+  max-width: 100%;
+  height: auto;
+}
+
+.dark-overlay {
+  background-color:rgba(0,0,0,0.5);
+  min-height:625px;
+}
+
+.carousel-image-1 {
+background:url('../../../assets/images/business-1137366.jpg');
+background-size: cover;
+}
+
+.carousel-image-4 {
+  background:url('../../../assets/images/earth-2581631.jpg');
+background-size: cover;
+}
+
+.carousel-image-2 {
+  background:url('../../../assets/images/brain-20424.jpg');
+background-size: cover;
+}
+
+.carousel-image-3 {
+  background:url('../../../assets/images/drone-2526685.jpg');
+  background-size: cover;
+}
+
+.carousel-image-5 {
+  background:url('../../../assets/images/innovation-2057543.jpg');
+  background-size: cover;
+}
+
+.carousel-image-6 {
+  background:url('../../../assets/images/businessman-3189794.jpg');
+  background-size: cover;
+}
+
+.carousel-image-7 {
+  background:url('../../../assets/images/beaded-2137080.jpg');
+ background-size: cover;
+}
+
+.box-link {
+ color:rgb(209, 189, 7);
+}
+
+.logistics{
+  margin-top: 10px;
+  color: #828078;
+}
+
+.advert{
+  background: #ffffff;
+  width:350px;
+  height:350px;
+  margin:10px;
+  padding:0px;
+}
+.advert img{
+  width:100%;
+  height:100%;
+}

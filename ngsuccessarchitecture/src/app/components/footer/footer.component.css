@@ -3,7 +3,6 @@
 	margin:0px;
 	padding: 0px;
     color:#F2ECE6;
-    height:500px;
 }
 
 .socialhoover:hover {
@@ -14,7 +13,5 @@
   background: url(../../../assets/images/banner.png) no-repeat center center;
   background-size: cover;
   min-width: 100%;
-  padding:0px;
-  margin:0px;
   min-height:500px;
 }
