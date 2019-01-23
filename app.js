@@ -1,13 +1,44 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const passport = require('passport');
+const authenticate = require('./authenticate');
+const config = require('./config');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const contactRouter = require('./routes/contact');
+const socialsRouter = require('./routes/socialsRouter');
+const activitiesRouter = require('./routes/activitiesRouter');
+const coursesRouter = require('./routes/coursesRouter');
 
-var app = express();
+const mongoose = require('mongoose');
+
+// Connection URL
+const url = config.mongoUrl;
+const connect = mongoose.connect(url, { useCreateIndex: true, useNewUrlParser: true });
+
+connect.then((db) => {
+    console.log("Connected correctly to SuccessArchitecture MOGODB server");
+    console.log("Connect to server via: http://localhost:3000/");
+}, (err) => { console.log(err); });
+
+const app = express();
+
+// Secure traffic only
+// to be done only at the end when we put in production 
+//
+// app.all('*', (req, res, next) => {
+//  if (req.secure) {
+//    return next();
+//  }
+//  else {
+//    res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
+//  }
+//});
+//
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +52,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/contact', contactRouter);
+app.use('/socials', socialsRouter);
+app.use('/courses', coursesRouter);
+app.use('/activities', activitiesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
