@@ -9,7 +9,7 @@ const topicsSchema = new Schema({
    time:  {type: String, default: ''}
 }, {timestamps: true});
 
-const coursesSchema = new Schema({
+const Courses = new Schema({
    coursename: { 
       type: String, 
       required: true 
@@ -21,7 +21,7 @@ const coursesSchema = new Schema({
       type: Number,
       default: 0
    },
-   coursetopics: [topicSchema],
+   coursetopics: [topicsSchema],
    deliverymechanisim: [String],              // delivery full online, online personal, or in person
    certificatetype: {
       type: String, 

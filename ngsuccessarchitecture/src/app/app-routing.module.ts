@@ -11,8 +11,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SettingsComponent } from './components/settings/settings.component';
-import { UseramendComponent } from './components/useramend/useramend.component';
 import { PasswordchangeComponent } from './components/passwordchange/passwordchange.component';
+import { PasswordforgetComponent } from './components/passwordforget/passwordforget.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -25,8 +25,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'settings', component: SettingsComponent},
-  {path: 'useramend', component: UseramendComponent},
   {path: 'passwordchange', component: PasswordchangeComponent},
+  {path: 'passwordforget', component: PasswordforgetComponent},
   {path: '**', component: HomeComponent}
 ];
 

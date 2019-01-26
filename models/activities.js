@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 // 2-downloading a document
 // 3-browsing a certain topic area. 
 //
-const activitiesSchema = new Schema({
+const Activities = new Schema({
    username: { 
       type: String, 
       required: true 
@@ -15,7 +15,7 @@ const activitiesSchema = new Schema({
       type: String
    },
    completed:  {
-      type: boolean, 
+      type: Boolean, 
       default: false
    },
    modulescompleted: {

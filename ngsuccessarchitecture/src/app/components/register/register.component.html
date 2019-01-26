@@ -1,3 +1,188 @@
-<p>
-  register works!
-</p>
+
+<div class="row mt-5">
+  <div class="col-md-5 mx-auto">
+    <div class="card card-form border-warning mb-5">
+      <div class="card-header">
+          <h3 class="text-center">Register Form</h3>
+      </div>
+      <div class="card-body">
+        <div class="row show-hide-message">
+            <div [ngClass]="messageClass" class="col-sm-9 border-warning h-50 mx-auto text-center">
+              <strong>{{message}}</strong>
+            </div>
+        </div>
+        <form [formGroup]="fr" (submit)="onRegisterSubmit()">
+          <div class="form-group">
+            <label for="username">User Name</label>
+            <div [ngClass]="{'has-error':(fr.controls.username.errors && fr.controls.username.dirty) || (!usernameValid && fr.controls.username.dirty), 'has-success': !fr.controls.username.errors && usernameValid}">
+              <input type="text" name="username" class="form-control"
+              formControlName="username" (blur)="checkUsername()">
+              <div class="help-block text-light small bg-danger pl-2" *ngIf="(fr.controls.username.errors && fr.controls.username.dirty) || (!usernameValid && fr.controls.username.dirty)">
+                <div *ngIf="fr.controls.username.errors?.required">
+                  UserName field is required
+                </div>
+                <div *ngIf="fr.controls.username.errors?.minlength || fr.controls.username.errors?.maxlength">
+                    UserName minimum characters: 3, Maximum characters: 15
+                </div>
+                <div *ngIf="fr.controls.username.errors?.validateUsername">
+                    Valid User Name must not have special characters
+                </div>
+                <div *ngIf="usernameMessage"> {{ usernameMessage }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div [ngClass]="{'has-error':(fr.controls.password.errors && fr.controls.password.dirty), 'has-success': !fr.controls.password.errors}">
+              <input type="password" name="password" class="form-control"
+              formControlName="password">
+              <div class="help-block text-light small bg-danger pl-2" *ngIf="fr.controls.password.errors && fr.controls.password.dirty">
+                  <div *ngIf="fr.controls.password.errors?.required">
+                    Password field is required
+                  </div>
+                  <div *ngIf="fr.controls.password.errors?.minlength || fr.controls.password.errors?.maxlength">
+                      Password minimum characters: 8, Maximum characters: 35
+                  </div>
+                  <div *ngIf="fr.controls.password.errors?.validatePassword">
+                      Password must have At least one uppercase letter, one lowercase letter and one number
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div [ngClass]="{'has-error':(fr.controls.email.errors && fr.controls.email.dirty) || (!emailValid && fr.controls.email.dirty), 'has-success': !fr.controls.email.errors && emailValid}">
+              <input type="email" name="email" class="form-control" placeholder="name@domain.com"
+              formControlName="email" (blur)="checkEmail()">
+              <div class="help-block text-light small bg-danger pl-2" *ngIf="(fr.controls.email.errors && fr.controls.email.dirty) || (!emailValid && fr.controls.email.dirty)">
+                  <div *ngIf="fr.controls.email.errors?.required">
+                    Email field is required
+                  </div>
+                  <div *ngIf="fr.controls.email.errors?.minlength || fr.controls.email.errors?.maxlength">
+                      Email minimum characters: 5, Maximum characters: 30
+                  </div>
+                  <div *ngIf="fr.controls.email.errors?.validateEmail">
+                      Email must be in a valid format
+                  </div>
+                  <div *ngIf="emailMessage"> {{ emailMessage }}</div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="extradata p-3 bg-light">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="firstname">First Name</label>
+                  <div [ngClass]="{'has-error':(fr.controls.firstname.errors && fr.controls.firstname.dirty), 'has-success': !fr.controls.firstname.errors}">
+                    <input type="firstname" name="firstname" class="form-control"
+                    formControlName="firstname">
+                    <div class="help-block text-light small bg-danger pl-2" *ngIf="fr.controls.firstname.errors && fr.controls.firstname.dirty">
+                        <div *ngIf="fr.controls.firstname.errors?.required">
+                          First Name field is required
+                        </div>
+                        <div *ngIf="fr.controls.firstname.errors?.minlength || fr.controls.firstname.errors?.maxlength">
+                            First Name minimum characters: 2, Maximum characters: 15
+                        </div>
+                        <div *ngIf="fr.controls.firstname.errors?.validateName">
+                            First Name must be in a valid format
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <label for="lastname">Last Name</label>
+                  <div [ngClass]="{'has-error':(fr.controls.lastname.errors && fr.controls.lastname.dirty), 'has-success': !fr.controls.lastname.errors}">
+                    <input type="lastname" name="lastname" class="form-control"
+                    formControlName="lastname">
+                    <div class="help-block text-light small bg-danger pl-2" *ngIf="fr.controls.lastname.errors && fr.controls.lastname.dirty">
+                        <div *ngIf="fr.controls.lastname.errors?.required">
+                          Last Name field is required
+                        </div>
+                        <div *ngIf="fr.controls.lastname.errors?.minlength || fr.controls.lastname.errors?.maxlength">
+                            Last Name minimum characters: 2, Maximum characters: 15
+                        </div>
+                        <div *ngIf="fr.controls.lastname.errors?.validateName">
+                            Last Name must be in a valid format
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!--/form-group-->
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="birthdate">Date of Birth</label>
+                  <input type="text" id="birthdate" name="birthdate" formControlName="birthdate"  class="form-control" bsDatepicker [bsConfig]="datePickerConfig" placeholder="Pick Your Birthdate"/>
+                </div>
+              </div>
+          </div><!--/form-group-->
+
+            <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label for="countrycode">Country Code</label>
+                    <select id="countrycode" class="form-control" formControlName="countrycode">
+                      <option *ngFor="let code of codes" [value]="code.countryCode">{{code.countryCode}}</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="mobile">Mobile Number</label>
+                    <div [ngClass]="{'has-error':(fr.controls.mobile.errors && fr.controls.mobile.dirty) || (!mobileValid && fr.controls.mobile.dirty), 'has-success': !fr.controls.mobile.errors && mobileValid}">
+                      <input type="mobile" name="mobile" class="form-control"
+                      formControlName="mobile" placeholder="9xx-xxx-xxxx" (blur)="checkMobile()">
+                      <div class="help-block text-light small bg-danger pl-2" *ngIf="(fr.controls.mobile.errors && fr.controls.mobile.dirty) || (!mobileValid && fr.controls.mobile.dirty)">
+                          <div *ngIf="fr.controls.mobile.errors?.required">
+                            Mobile Number field is required
+                          </div>
+                          <div *ngIf="fr.controls.mobile.errors?.minlength || fr.controls.mobile.errors?.maxlength">
+                              Mobile Number characters: 8, Maximum characters: 10
+                          </div>
+                          <div *ngIf="fr.controls.mobile.errors?.validateMobile">
+                              Mobile Number must be in a valid format
+                          </div>
+                          <div *ngIf="mobileMessage"> {{ mobileMessage }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div><!--/form-group-->
+          </div>
+          <button [disabled]="!fr.valid || !usernameValid || !emailValid || !mobileValid || processing" type="submit" class="btn btn-primary btn-block mt-3">Submit</button>
+        </form>
+        <hr>
+        <div class="row">
+          <div class="col-sm-8 mx-auto">
+            <form [formGroup]="fv" (submit)="onVerifyClick()">
+              <div class="form-group mt-3" *ngIf="showverifyemail">
+                <h1 class="text-danger text-center m-2">{{timeleft}}</h1>
+                <div [ngClass]="{'has-error':(fv.controls.verifyInput.errors && fv.controls.verifyInput.dirty) || (fv.errors?.emailVerification && fv.controls.verifyInput.dirty), 'has-success': !fv.controls.verifyInput.errors && !fv.errors?.emailVerification}">
+                    <input type="text" name="verifyInput" class="form-control mt-2"
+                    formControlName="verifyInput">
+                    <div class="help-block text-light small bg-danger pl-2" *ngIf="(fv.controls.verifyInput.errors && fv.controls.verifyInput.dirty) ||(fv.errors?.emailVerification && fv.controls.verifyInput.dirty)">
+                        <div *ngIf="fv.controls.verifyInput.errors?.required">
+                          Email Verification Code is required! Please check your email
+                        </div>
+                        <div *ngIf="fv.controls.verifyInput.errors?.minlength || fv.controls.verifyInput.errors?.maxlength">
+                            Email Verification Code is ONLY 6 characters
+                        </div>
+                        <div *ngIf="fv.errors?.emailVerification">
+                            Email Verification Code must be EXACTLY what you received in your email
+                        </div>
+                    </div>
+                  </div>
+                <button [disabled]="!fv.valid" type="submit" class="btn btn-danger btn-block mt-2">Verify Email</button>
+                <div class="text-center mt-2">
+                    <h3>Enter 6 Digit Verification Code</h3>
+                    <h3>Please check your Email</h3>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

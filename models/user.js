@@ -28,7 +28,7 @@ const User = new Schema({
         unique: true, 
         trim:true
     },
-    documentlocation: {                 // Avatar image at AWS Storage.
+    avatar: {                 // Avatar image at AWS Storage.
         type: String, 
         default: ''
     },

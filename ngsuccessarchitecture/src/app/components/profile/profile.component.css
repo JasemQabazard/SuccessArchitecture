@@ -1,0 +1,16 @@
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.extradata {
+  border: 1px solid gray;
+}
+
+input, select {
+ background-color : #f1f7fc;
+}
+
+.imagePreview {
+  width: 150px;
+  height: 150px;
+}

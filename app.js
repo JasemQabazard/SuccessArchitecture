@@ -13,6 +13,7 @@ const contactRouter = require('./routes/contact');
 const socialsRouter = require('./routes/socialsRouter');
 const activitiesRouter = require('./routes/activitiesRouter');
 const coursesRouter = require('./routes/coursesRouter');
+const uploadRouter = require('./routes/uploadRouter');
 
 const mongoose = require('mongoose');
 
@@ -50,12 +51,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(passport.initialize());
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/contact', contactRouter);
 app.use('/socials', socialsRouter);
 app.use('/courses', coursesRouter);
 app.use('/activities', activitiesRouter);
+app.use('/upload', uploadRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

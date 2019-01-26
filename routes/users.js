@@ -156,17 +156,13 @@ router.route('/register')
       {
          user.mobile = req.body.mobile;
       }
-      if (req.body.role)
+      if (req.body.avatar)
       {
-        user.role = req.body.role;
+        user.avatar = req.body.avatar;
       } 
-      if (req.body._gid)
+      if (req.body.birthdate)
       {
-        user._gid = req.body._gid;
-      } 
-      if (req.body._mid)
-      {
-         user._mid = req.body._mid;
+         user.birthdate = req.body.birthdate;
       }
       console.log('user', user);
       user.save((err, user) => {
@@ -217,36 +213,6 @@ router.post('/mailer', function (req, res, next) {
 });
 
 
-/* ==========================================================================
-     Route to send user / customer MADD email with the username, password 
-  =========================================================================== */
-  router.post('/maddmailer', function (req, res, next) {
-    var transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            user: 'successarchitecture@gmail.com',
-            pass: 'pbdqtlxogbdjonru'
-        }
-    });
-    var mailOptions = {
-        from: 'successarchitecture@gmail.com',
-        to: req.body.email,
-        subject: 'Your Registration Information',
-        text: 'You are receiving this email because the merchant:'+ req.body.merchantname +  'registered you to zario.io and the black diamond loyalty program. Your username is: ' +req.body.username + 'and your password is: '+ req.body.password+ 'Please visit our application at: www.zario.io.com and sign on to complete the registration process.',
-        html: '<p>You are receiving this email because the merchant: </p>' + req.body.merchantname + '<p>registered you to zario.io and the black diamond loyalty program. Your username is: </p>' + req.body.username + '<p>and your password is: </p>' +req.body.password + '<p>Please visit our application at: www.zario.io.com and sign on to complete the registration process.</p>'
-    };
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            next(error);
-        } else {
-            res.status(200).json({
-                status: 'Madd Mail Registration Message Sent' + info.response,
-                success: true
-            });
-        }
-    });
-});
-
 /* ============================================================
      Route send email for forget the password requires the email id 
      and the password generated OTP-ONE TIME PASSWORD
@@ -263,9 +229,9 @@ router.post('/passwordcodemailer', function (req, res, next) {
     var mailOptions = {
         from: 'successarchitecture@gmail.com',
         to: req.body.email,
-        subject: 'Your Forget Password Code is: ' + req.body.vcode,
-        text: 'You received this email because you are attempting to reset your Forgotten Password. If you wish to continue with this process please enter the following verification code in the allowed field in the application: ' + req.body.vcode,
-        html: '<p>You received this email because you are attempting to reset your Forgotten Password.</p><br><p> If you wish to continue with the process please enter the following verification code in the allowed field in the application: </p><strong>' + req.body.vcode +'</strong>'
+        subject: 'Success Architecture Forget Password One Time Code: ' + req.body.vcode,
+        text: 'You received this email because you are attempting to reset your Forgotten Password in www.successarchitecture.com. If you wish to continue with the process please enter the following verification one time code in the allowed field in the application: ' + req.body.vcode,
+        html: '<p>You received this email because you are attempting to reset your Forgotten Password in www.successarchitecture.com.</p><br><p> If you wish to continue with the process please enter the following verification onme time code in the allowed field in the application: </p><strong>' + req.body.vcode +'</strong>'
     };
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
@@ -275,36 +241,6 @@ router.post('/passwordcodemailer', function (req, res, next) {
             console.log('password forget code email sent');
             res.status(200).json({
                 status: 'password forget Code Message Sent' + info.response,
-                success: true
-            });
-        }
-    });
-});
-
-/* ==========================================================================
-     Route to send merchant email informing him of his registration event and that his status is pending uploading cid/ passport and company registration documents
-  =========================================================================== */
-  router.post('/merchantmailer', function (req, res, next) {
-    var transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            user: 'successarchitecture@gmail.com',
-            pass: 'pbdqtlxogbdjonru'
-        }
-    });
-    var mailOptions = {
-        from: 'successarchitecture@gmail.com',
-        to: req.body.email,
-        subject: 'Your Registration Status',
-        text: 'You are receiving this email because the merchant:'+ req.body.name +  'registered you to zario.io and the black diamond loyalty program. Your username is: ' +req.body.username + 'and your password is: '+ req.body.password+ 'Please visit our application at: www.zario.io.com and sign on to complete the registration process. You are requested to submit your company registration official documents and the civil id or the passport copies for company officers. Once you upload your documents please allow us to verify the documents and hence we will activate your status. Thank you for adding value to our community.',
-        html: '<p>You are receiving this email because the merchant: </p>' + req.body.name + '<p>registered you to zario.io and the black diamond loyalty program. Your username is: </p>' + req.body.username + '<p>and your password is: </p>' +req.body.password + '<p>Please visit our application at: www.zario.io.com and sign on to complete the registration process. You are requested to submit your company registration official documents and the civil id or the passport copies for company officers. Once you upload your documents please allow us to verify the documents and hence we will activate your status. Thank you for adding value to our community.</p>'
-    };
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            next(error);
-        } else {
-            res.status(200).json({
-                status: 'MERCHANT Registration email Sent' + info.response,
                 success: true
             });
         }
@@ -325,9 +261,9 @@ router.post('/passwordcodemailer', function (req, res, next) {
     var mailOptions = {
         from: 'successarchitecture@gmail.com',
         to: req.body.email,
-        subject: 'Your Registration Status',
-        text: 'You are receiving this email because you:'+ req.body.name +  'registered to zario.io and the black diamond loyalty program. Your username is: ' +req.body.username + 'and your password is: '+ req.body.password+ 'Please visit our application at: www.zario.io.com and sign on to complete the registration process. You can start by completing your customer profile records and gain 100 application merit points in the process.',
-        html: '<p>You are receiving this email because you: </p>' + req.body.name + '<p>registered to zario.io and the black diamond loyalty program. Your username is: </p>' + req.body.username + '<p>and your password is: </p>' +req.body.password + '<p>Please visit our application at: www.zario.io.com and sign on to complete the registration process. You can start by completing your customer profile records and gain 100 application merit points in the process.</p>'
+        subject: 'Registration Status www.successarchitecture.com',
+        text: 'You are receiving this email because you:'+ req.body.name +  'registered to www.successarchitecture.com. Your username is: ' +req.body.username + 'and your password is: '+ req.body.password+ 'Please visit our application web site and sign on to complete the registration process.',
+        html: '<p>You are receiving this email because you: </p>' + req.body.name + '<p>registered to www.successarchitecture.com. Your username is: </p>' + req.body.username + '<p>and your password is: </p>' +req.body.password + '<p>Please visit our application web site and sign on to complete the registration process.</p>'
     };
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
@@ -369,7 +305,7 @@ router.post('/passwordcodemailer', function (req, res, next) {
   });
 
     /* ============================================================
-     Route to get user record by email for cart transaction processing
+     Route to get user record by email for .............
   ============================================================ */
   router.get('/getUserbyemail/:email', (req, res) => {
     // Check if email was provided in paramaters
@@ -393,7 +329,7 @@ router.post('/passwordcodemailer', function (req, res, next) {
   });
 
     /* ============================================================
-     Route to get user record by mobile number for cart transaction processing
+     Route to get user record by mobile number for .................
   ============================================================ */
   router.get('/getUserbymobile/:mobile', (req, res) => {
     // Check if mobile was provided in paramaters
@@ -485,7 +421,6 @@ router.route('/logout')
 .post(cors.corsWithOptions, (req, res) => {
   req.logOut();
   res.redirect('/');
-  // res.send(200).json({status: 'Bye!'});
 });
 
 router.get('/checkJWTToken', (req, res) => {
