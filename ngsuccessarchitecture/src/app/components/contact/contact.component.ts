@@ -1,15 +1,101 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../../services/auth.service';
+
+import { Contact } from '../../shared/contact';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.sass']
+  styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
+  fc: FormGroup;
+  contact: Contact;
+  message: string;
+  messageClass: string;
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    @Inject('BaseURL') private BaseURL
+  ) {
+    this.createfc();
+   }
 
   ngOnInit() {
+  }
+
+  createfc() {
+    this.fc = this.formBuilder.group({
+      name: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(30),
+        this.validateName
+      ])],
+      email: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(30),
+        this.validateEmail // Custom validation
+      ])],
+      subject: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(50)
+      ])],
+      message: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(50)
+      ])]
+    });
+  }
+
+    // Function to validate e-mail is proper format
+    validateEmail(controls) {
+      // Create a regular expression
+      // tslint:disable-next-line:max-line-length
+      const regExp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+      // Test email against regular expression
+      if (regExp.test(controls.value)) {
+        return null; // Return as valid email
+      } else {
+        return { 'validateEmail': true }; // Return as invalid email
+      }
+    }
+
+      // Function to validate name is proper format
+  validateName(controls) {
+    // Create a regular expression
+    const regExp = new RegExp(/^(([A-Za-z]+[\-\']?)*([A-Za-z]+)?\s)+([A-Za-z]+[\-\']?)*([A-Za-z]+)?$/);
+    // Test name against regular expression
+    if (regExp.test(controls.value)) {
+      return null; // Return as valid name
+    } else {
+      return { 'validateName': true }; // Return as invalid name
+    }
+  }
+  onContactSubmit() {
+    this.contact = this.fc.value;
+    this.authService.contactSupport(this.contact).subscribe(
+      data => {
+        console.log('data', data);
+        this.messageClass = 'alert alert-success';
+        this.message = 'Your information has been received successfull';
+        this.fc.reset();
+        setTimeout(() => {
+          this.router.navigate(['/home']); // Redirect to home page
+        }, 1500);
+      },
+      errormessage => {
+        this.message = <any>errormessage;
+        this.messageClass = 'alert alert-danger';
+      }
+    );
   }
 
 }

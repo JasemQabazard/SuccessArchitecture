@@ -1,3 +1,86 @@
-<p>
-  contact works!
-</p>
+
+<div class="row mt-5">
+  <div class="col-md-5 mx-auto">
+    <div class="card card-form border-warning mb-5">
+      <div class="card-header">
+          <h3 class="text-center">Contact Us Form</h3>
+      </div>
+      <div class="card-body">
+       <div class="row show-hide-message">
+           <div [ngClass]="messageClass" class="col-sm-9 pl-2 border-warning h-50 mx-auto">
+             <strong>{{message}}</strong>
+           </div>
+       </div>
+      <div class="card-body">
+        <form [formGroup]="fc" (submit)="onContactSubmit()">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <div [ngClass]="{'has-error':(fc.controls.name.errors && fc.controls.name.dirty), 'has-success': !fc.controls.name.errors}">
+              <input type="text" name="name" class="form-control"
+              formControlName="name">
+              <div class="help-block text-light small bg-danger pl-2" *ngIf="fc.controls.name.errors && fc.controls.name.dirty">
+                <div *ngIf="fc.controls.name.errors?.required">
+                    Name field is required
+                </div>
+                <div *ngIf="fc.controls.name.errors?.minlength || fc.controls.name.errors?.maxlength">
+                    Name minimum characters: 5, Maximum characters: 30
+                </div>
+                <div *ngIf="fc.controls.name.errors?.validateName">
+                    Valid Name has no special characters and be in first/ second name format
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div [ngClass]="{'has-error':(fc.controls.email.errors && fc.controls.email.dirty), 'has-success': !fc.controls.email.errors}">
+              <input type="email" name="email" class="form-control"
+              formControlName="email">
+              <div class="help-block text-light small bg-danger pl-2" *ngIf="fc.controls.email.errors && fc.controls.email.dirty">
+                  <div *ngIf="fc.controls.email.errors?.required">
+                    Email field is required
+                  </div>
+                  <div *ngIf="fc.controls.email.errors?.minlength || fc.controls.email.errors?.maxlength">
+                      Email minimum characters: 5, Maximum characters: 30
+                  </div>
+                  <div *ngIf="fc.controls.email.errors?.validateEmail">
+                      Email must be in a valid format
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+           <label for="subject">Subject</label>
+           <div [ngClass]="{'has-error':(fc.controls.subject.errors && fc.controls.subject.dirty), 'has-success': !fc.controls.subject.errors}">
+             <input type="subject" name="subject" class="form-control"
+             formControlName="subject">
+             <div class="help-block text-light small bg-danger pl-2" *ngIf="fc.controls.subject.errors && fc.controls.subject.dirty">
+                 <div *ngIf="fc.controls.subject.errors?.required">
+                   Subject field is required
+                 </div>
+                 <div *ngIf="fc.controls.subject.errors?.minlength || fc.controls.subject.errors?.maxlength">
+                     Subject minimum characters: 10, Maximum characters: 50
+                 </div>
+             </div>
+           </div>
+         </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <div [ngClass]="{'has-error':(fc.controls.message.errors && fc.controls.message.dirty), 'has-success': !fc.controls.message.errors}">
+              <textarea name="message" class="form-control" rows="5" formControlName="message"></textarea>
+              <div class="help-block text-light small bg-danger pl-2" *ngIf="fc.controls.message.errors && fc.controls.message.dirty">
+                <div *ngIf="fc.controls.message.errors?.required">
+                  Message field is required
+                </div>
+                <div *ngIf="fc.controls.message.errors?.minlength ">
+                 Message minimum characters: 50
+             </div>
+              </div>
+            </div>
+          </div>
+          <button [disabled]="!fc.valid" type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
