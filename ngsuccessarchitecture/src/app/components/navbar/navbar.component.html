@@ -7,7 +7,7 @@
           </h2>
       </div>
       </a>
-    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   <div class="collapse navbar-collapse mx-0 px-0" id="navbarNav">
@@ -18,11 +18,25 @@
             <i class="fas fa-home"></i> Home
           </a>
       </li>
-      <li class="nav-item" [routerLinkActive]="['active']"
+      <li class="nav-item dropdown" [routerLinkActive]="['active']"
       [routerLinkActiveOptions]="{exact: true}">
-        <a routerLink="/blog" class="nav-link">
-          <i class="fab fa-blogger"></i> Blog
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+            <i class="fas fa-tasks"></i> Other Programs
         </a>
+        <div class="dropdown-menu">
+          <a routerLink="/well" class="dropdown-item">
+            <i class="fab fa-angellist"></i> Well Being
+          </a>
+          <a routerLink="/study" class="dropdown-item">
+            <i class="fas fa-graduation-cap"></i> Study & Teaching Skills
+          </a>
+          <a routerLink="/chi" class="dropdown-item">
+            <i class="fas fa-spa"></i> Chi Gong Instructor
+          </a>
+          <a routerLink="/camp" class="dropdown-item">
+            <i class="fas fa-campground"></i> North Thailand Boot Camp
+          </a>
+        </div>
       </li>
       <li class="nav-item" [routerLinkActive]="['active']"
       [routerLinkActiveOptions]="{exact: true}">
@@ -32,17 +46,8 @@
       </li>
       <li class="nav-item" [routerLinkActive]="['active']"
       [routerLinkActiveOptions]="{exact: true}">
-        <a routerLink="/about" class="nav-link" *ngIf="userlanguage==='english'">
-          <i class="fas fa-info-circle"></i> About
-        </a>
-        <a routerLink="/abouta" class="nav-link" *ngIf="userlanguage==='arabic'">
-          <i class="fas fa-info-circle"></i> About
-        </a>
-      </li>
-      <li class="nav-item" [routerLinkActive]="['active']"
-      [routerLinkActiveOptions]="{exact: true}">
-        <a routerLink="/contact" class="nav-link">
-          <i class="fas fa-bullhorn"></i> Contact
+        <a routerLink="/blog" class="nav-link">
+          <i class="fab fa-blogger"></i> Blog
         </a>
       </li>
     </ul>
@@ -68,11 +73,22 @@
           <a routerLink="/profile" class="dropdown-item">
             <i class="fas fa-cogs"></i> Profile
           </a>
-          <a routerLink="/settings" class="dropdown-item" *ngIf="ADMIN">
-            <i class="fas fa-cogs"></i> Settings
-          </a>
           <a routerLink="/passwordchange" class="dropdown-item">
             <i class="fas fa-angle-double-right"></i> Change Password
+          </a>
+        </div>
+      </li>
+      <li class="nav-item dropdown" [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{exact: true}">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+            <i class="fas fa-cogs"></i> Support
+        </a>
+        <div class="dropdown-menu">
+          <a routerLink="/contact" class="dropdown-item">
+            <i class="fas fa-bullhorn"></i> Contact
+          </a>
+          <a routerLink="/about" class="dropdown-item">
+            <i class="fas fa-info-circle"></i> About
           </a>
         </div>
       </li>

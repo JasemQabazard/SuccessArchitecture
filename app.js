@@ -22,7 +22,7 @@ const url = config.mongoUrl;
 const connect = mongoose.connect(url, { useCreateIndex: true, useNewUrlParser: true });
 
 connect.then((db) => {
-    console.log("Connected correctly to SuccessArchitecture MOGODB server");
+    console.log("Connected correctly to SuccessArchitecture MONGODB server");
     console.log("Connect to server via: http://localhost:3000/");
 }, (err) => { console.log(err); });
 

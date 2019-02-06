@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 
 import { AuthService } from './services/auth.service';
 import { BlogService } from './services/blog.service';
@@ -30,8 +31,11 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { PasswordchangeComponent } from './components/passwordchange/passwordchange.component';
-import { AboutaComponent } from './components/abouta/abouta.component';
 import { PasswordforgetComponent } from './components/passwordforget/passwordforget.component';
+import { HomewellbeingComponent } from './components/homewellbeing/homewellbeing.component';
+import { HomechiComponent } from './components/homechi/homechi.component';
+import { HomecampComponent } from './components/homecamp/homecamp.component';
+import { HomestudyComponent } from './components/homestudy/homestudy.component';
 
 @NgModule({
   declarations: [
@@ -48,8 +52,11 @@ import { PasswordforgetComponent } from './components/passwordforget/passwordfor
     ProfileComponent,
     SettingsComponent,
     PasswordchangeComponent,
-    AboutaComponent,
-    PasswordforgetComponent
+    PasswordforgetComponent,
+    HomewellbeingComponent,
+    HomechiComponent,
+    HomecampComponent,
+    HomestudyComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +66,7 @@ import { PasswordforgetComponent } from './components/passwordforget/passwordfor
     ReactiveFormsModule,
     FormsModule,
     EditorModule,
+    Ng2CarouselamosModule,
     BsDatepickerModule.forRoot(),
     HttpClientModule
   ],

@@ -1,0 +1,16 @@
+.well {
+  min-height: 450px;
+  background: url('../../../assets/images/woman-9454271.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+
+#colortitle {
+  color: #9b821e;
+}
+
+.programstitle {
+  text-shadow: 9px 6px rgb(175, 168, 168);
+  font-weight: bold;
+  text-decoration: underline;
+}
