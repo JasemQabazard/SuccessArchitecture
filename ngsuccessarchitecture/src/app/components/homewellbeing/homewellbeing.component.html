@@ -17,6 +17,10 @@
                 Discover a diet worthy of your mind, brain, body connection. A diet that maximizes your core energy and strength. Our body weight is yet another marvelous example of Success Architecture balance or Homeostasis working in our bodies to maintain proper weight. As you may know our brain main purpose is survival. It relentlessly strives day in and day out to keep us alive. Maintaining a healthy body weight properly requires the control and manipulation of a very large number of variables. In our Success Architecture control module these variables come together and resolve their value differences to maintain a settling body weight. Then our brain and the intelligence in our bodies maintain this weight and defend it against change.
             </h5>
         </div>
+        <p *ngIf="CUSTOMER">
+          <a class="btn btn-link" target="_self" href="../../../assets/downloads/01-sae_Prerequisite.pdf" download="EnglishPrerequisite">Download the Success Architecture Prerequisite Course Document... &raquo;
+          </a>
+        </p>
         <h3 id="colortitle">Besides the Main core training programs; you can take the following two training courses.</h3>
         <br /><br /><br />
         <div class="col-1"></div>
@@ -39,7 +43,7 @@
                     This course will teach you how to discover the optimal diet for you personally and for your best functioning brain.
 
                 </h5>
-                <button class="btn btn-link text-primary">To learn more please download our brochure...</button>
+                <button *ngIf="CUSTOMER" class="btn btn-link text-primary">To learn more please download our brochure...</button>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6">
@@ -74,7 +78,7 @@
                 <li><h5>Meditative concerned with calmness of the mind and mindfulness.</h5></li>
                 <li><h5>Martial Arts concerned with infusing Chi Energy in the mind for strength and power.</h5></li>
               </ul>
-              <button class="btn btn-link text-primary">To learn more please download our brochure...</button>
+              <button *ngIf="CUSTOMER" class="btn btn-link text-primary">To learn more please download our brochure...</button>
             </div>
         </div>
         <div class="col-sm-6 mt-3">
