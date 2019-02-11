@@ -1,3 +1,204 @@
-<p>
-  blog works!
-</p>
+<section class="blog-image-1">
+  <div class="container dark-overlay pt-5">
+    <div class="row pt-5">
+      <div class="col-sm-12 text-center">
+        <button type="button" class="btn text-white mt-5 mb-2" [ngClass]="btnAddEditPost" *ngIf="userrole" (click)="changeCategory('Add Edit Post')">
+          Add Edit Post
+        </button>
+        <button type="button" class="btn text-white mt-5 mb-2" [ngClass]="btnDiet"  (click)="changeCategory('diet')">
+          Diet
+        </button>
+        <button type="button" class="btn text-white mt-5 mb-2" [ngClass]="btnCHI"  (click)="changeCategory('chi')">
+          Chi System
+        </button>
+        <button type="button" class="btn text-white mt-5 mb-2" [ngClass]="btnInnovation"  (click)="changeCategory('innovation')">
+          Innovation
+        </button>
+        <button type="button" class="btn text-white mt-5 mb-2" [ngClass]="btnAll"  (click)="changeCategory('all')">
+          All Categories
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+==========Section for Add Maintain Blog Posts =========
+-->
+<section class="m-5" *ngIf="addEditPost">
+  <div class="container-fluid bgcontrol">
+    <div class="row">
+      <div class="col-md-9 my-3">
+        <input type="text" [(ngModel)]="draftblog.title" (change)="changeNotUpdated()" class="form-control mb-3"
+          placeholder="Enter Blog Post Title Here">
+        <editor class="mb-3" apiKey="iubcx8nldpaivlt25uvzow0ouwb4a3ot0iqn73fexv6uoml5" [init]="{plugins: 'link', height: '900'}"
+          [(ngModel)]="draftblog.post" (onChange)="changeNotUpdated()"></editor>
+      </div>
+      <div class="col-md-3 card card-form border-warning my-3 p-0">
+        <div class="card-header">
+          <h4 class="text-center">Post Parameters</h4>
+          <div class="row show-hide-message mt-3">
+              <div [ngClass]="messageClass" class="mx-auto">
+                <strong>{{message}}</strong>
+              </div>
+          </div>
+        </div>
+        <form [formGroup]="fb">
+          <div class="p-3">
+            <div class="form-group mb-3">
+              <label for="blogcategory" class="mt-3"><strong>Select Blog Category</strong></label>
+              <select id="blogcategory" class="form-control" formControlName="blogcategory">
+                <option *ngFor="let category of blogcategories" [value]="category.blogcategoryname">{{category.blogcategoryname}}</option>
+              </select>
+            </div>
+            <hr>
+            <hr>
+            <div class="row imageContainer mx-auto">
+              <img class="border-warning img-fluid mx-auto imagePreview" [src]="mediaPath" alt="default Media">
+            </div>
+            <div class="row">
+              <label class="center-block bg-light mx-auto">
+                <strong>{{selectedMediaFileName}}</strong>
+              </label>
+            </div>
+            <input type="file" name="mediaFile" style="display:none" accept="image/*" (change)="mediaFileSelected($event)" #mediaFile>
+            <button class="btn btn-secondary btn-small border-dark btn-block mt-1" (click)="mediaFile.click()">Select Post Media
+            </button>
+            <button class="btn btn-primary btn-small border-dark btn-block" [disabled]="!mediaChanged" (click)="uploadMediaFile()">Upload Post Media
+            </button>
+            <hr>
+            <hr>
+            <button class="btn btn-secondary btn-small border-dark btn-block mt-5" [disabled]="!draftblog.title || !draftblog.post" (click)="saveDraft()">Save
+              Draft Post</button>
+            <button class="btn btn-danger btn-small border-dark btn-block mt-3" [disabled]="!LOCALSTORAGE" (click)="cancelDraftPost()">Cancel
+              Saved Draft Post</button>
+            <button class="btn btn-primary btn-small border-dark btn-block mt-3" *ngIf="_bid === ''" [disabled]="notUpdated"
+              (click)="publish()">Publish Post</button>
+            <button class="btn btn-primary btn-small border-dark btn-block mt-3" *ngIf="_bid !== ''" [disabled]="notUpdated"
+              (click)="updatePost()">Update Post</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="my-1" *ngIf="!addEditPost">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 imageBG" [ngStyle]="{'background-image': 'url(' + currentlyDisplayed.media + ')', 'background-position': 'center center', 'background-size': 'cover'}">
+      </div>
+      <div class="col-sm-9 px-0 mt-3">
+        <div class="card col-sm-12 maincard">
+          <div class="card-header"><h3>{{currentlyDisplayed.title}}</h3></div>
+          <div class="card-body">
+            <div class="mt-2" [innerHTML]="currentlyDisplayed.post">
+            </div>
+          </div>
+          <hr>
+          <div class="row col-sm-12">
+            <div>
+              <strong *ngIf="!iLove">
+                <button class="btn btn-link" (click)="toggleLove()" [disabled]="userrole === undefined">
+                  <i class="far fa-heart" style="font-size:20px;color:red;"> {{currentlyDisplayed.hearts}}</i>
+                </button>
+              </strong>
+              <strong *ngIf="iLove">
+                <button class="btn btn-link" (click)="toggleLove()" [disabled]="userrole === undefined">
+                  <i class="fa fa-heart" style="font-size:20px;color:red;"> {{currentlyDisplayed.hearts}}</i>
+                </button>
+              </strong>
+              <select>
+                <option *ngFor="let heart of currentlyDisplayed.hearted">{{heart}}</option>
+              </select>
+            </div>
+            <div class="ml-auto">
+              <strong *ngIf="!iHate">
+                <button class="btn btn-link" (click)="toggleHate()" [disabled]="userrole === undefined">
+                  <i class="far fa-heart" style="font-size:20px;color:black;"> {{currentlyDisplayed.hates}}</i>
+                </button>
+              </strong>
+              <strong *ngIf="iHate">
+                <button class="btn btn-link" (click)="toggleHate()" [disabled]="userrole === undefined">
+                  <i class="fa fa-heart" style="font-size:20px;color:black;"> {{currentlyDisplayed.hates}}</i>
+                </button>
+              </strong>
+              <select>
+                <option *ngFor="let hate of currentlyDisplayed.hated">{{hate}}</option>
+              </select>
+            </div>
+          </div>
+          <hr>
+          <button type="button" class="btn btn-outline-warning btn-block mb-3" [disabled]="username !== currentlyDisplayed.username || LOCALSTORAGE"
+            (click)="editBlogPost()">Edit Blog Post</button>
+          <div class="card-footer">
+            <br />
+            <hr>
+            <h5>Comments</h5>
+            <hr>
+            <div class="ml-3" *ngFor="let c of currentlyDisplayed.comments; index as j">
+              <div class="row col-sm-12 m-0 p-0">
+                  <div class="col-sm-9 my-1">
+                    <p><strong>{{c.name}}</strong> @{{c.createdAt | date:'dd-MMM-yyyy'}}</p>
+                    <div class="h-50 align-text-top mt-2">
+                      <p>{{c.comment}}</p>
+                    </div>
+                  </div>
+                  <div class="col-sm-2 my-1">
+                    <div class="btn-group btn-group-sm" *ngIf="realname === c.name">
+                      <button type="button" class="btn btn-outline-danger h-25 btn-sm" (click)="deleteComments(j)"
+                      placement="top" tooltip="Delete">
+                        <i class="far fa-trash-alt fa-xs"></i>
+                      </button>
+                      <button type="button" class="btn btn-outline-success h-25 btn-sm" (click)="editComments(j)"
+                      placement="top" tooltip="Edit">
+                        <i class="far fa-edit fa-xs"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              <hr>
+            </div>
+            <textarea class="form-control col-sm-12" rows="3" [(ngModel)]="komment" (ngModelChange)="commentNotUpdated = false"
+              [disabled]="userrole === undefined"></textarea>
+            <button type="button" class="btn btn-outline-success btn-block btn-sm col-sm-4 ml-auto mt-2" [disabled]="userrole === undefined || commentNotUpdated" *ngIf="_cid === ''" (click)="addPostComment()">Add Comment</button>
+              <button type="button" class="btn btn-outline-success btn-block btn-sm col-sm-4 ml-auto mt-2" [disabled]="userrole === undefined || commentNotUpdated" *ngIf="_cid !== ''" (click)="addPostComment()">Update Comment</button>
+            <button type="button" class="btn btn-outline-danger btn-block btn-sm col-sm-4 ml-auto" [disabled]="userrole === undefined || commentNotUpdated"
+              (click)="cancelPostComment()">Cancel Editing</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3 sidediv">
+        <div class="card m-3" *ngFor="let b of displayedBlogs; index as j">
+          <div *ngIf="b.title">
+            <div class="card-header"><h4>{{b.title}}</h4></div>
+            <div class="card-body">
+              <div class="picdiv">
+                <img class="img-fluid" src="{{b.media}}" alt="Blog Media">
+              </div>
+              <div [innerHTML]="(b.post).substring(0,50)">
+              </div>
+              <button class="btn btn-link" (click)="displayThisBlog(j)">more...</button>
+            </div>
+            <div class="card-footer">
+              <strong>
+                <i class="fa fa-heart ml-3" aria-hidden="true" style="font-size:20px;color:red;"> {{b.hearts}}</i>
+                <i class="fa fa-heart ml-3" aria-hidden="true" style="font-size:20px;color:black;"> {{b.hates}}</i>
+              </strong>
+            </div>
+          </div>
+        </div>
+        <div class="row py-4 px-0">
+          <div class="btn-group btn-group-sm col-sm-12 m-0 p-0" id="btn-bar">
+            <button type="button" class="btn btn-outline-success col-sm-3 m-0" [disabled]="!PREVIOUS" (click)="firstBlogGroup()">First</button>
+            <button type="button" class="btn btn-outline-primary col-sm-3 m-0" [disabled]="!PREVIOUS" (click)="previousBlogGroup()">Prev</button>
+            <button type="button" class="btn btn-outline-primary col-sm-3 m-0" [disabled]="!NEXT" (click)="nextBlogGroup()">Next</button>
+            <button type="button" class="btn btn-outline-danger col-sm-3 m-0" [disabled]="!NEXT" (click)="lastBlogGroup()">Last</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>

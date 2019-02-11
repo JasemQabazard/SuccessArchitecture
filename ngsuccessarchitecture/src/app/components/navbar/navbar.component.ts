@@ -43,27 +43,27 @@ export class NavbarComponent implements OnInit {
             this.ENGLISH = false;
           }
         });
-        this.authService.loadUserCredentials();
-        this.subscription = this.authService.getUserrole()
-        .subscribe(
-          role => {
-            this.userrole = role;
-            if (role === undefined) {
-              this.USER = true;
-              this.CUSTOMER = false;
-              this.ADMIN = false;
-            } else if (role === 'CUSTOMER') {
-              this.USER = false;
-              this.CUSTOMER = true;
-              this.ADMIN = false;
-            } else if (role === 'ADMIN') {
-              this.ADMIN = true;
-              this.USER = false;
-              this.CUSTOMER = false;
-            }
-            // tslint:disable-next-line:max-line-length
-            console.log('role this.USER this.ADMIN this.CUSTOMER', role, this.USER, this.ADMIN, this.CUSTOMER);
-          });
+      this.authService.loadUserCredentials();
+      this.subscription = this.authService.getUserrole()
+      .subscribe(
+        role => {
+          this.userrole = role;
+          if (role === undefined) {
+            this.USER = true;
+            this.CUSTOMER = false;
+            this.ADMIN = false;
+          } else if (role === 'CUSTOMER') {
+            this.USER = false;
+            this.CUSTOMER = true;
+            this.ADMIN = false;
+          } else if (role === 'ADMIN') {
+            this.ADMIN = true;
+            this.USER = false;
+            this.CUSTOMER = false;
+          }
+          // tslint:disable-next-line:max-line-length
+          console.log('role this.USER this.ADMIN this.CUSTOMER', role, this.USER, this.ADMIN, this.CUSTOMER);
+        });
         this.subscription = this.authService.getRealname()
         .subscribe(
           realname => {

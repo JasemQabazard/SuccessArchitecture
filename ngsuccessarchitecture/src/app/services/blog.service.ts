@@ -22,35 +22,35 @@ export class BlogService {
     this.httb = new HttpClient(httpBackend);
   }
 
-  getBlogs(): Observable<any> {
-    return  this.http.get(baseURL + '/socials')
+  getBlogs(): Observable<Blog[]> {
+    return  this.http.get<Blog[]>(baseURL + '/socials')
                     .catch(error => this.processHttpmsgService.handleError(error));
   }
 
   // adding new blog t0 socials database on the server
-  addBlog(blog): Observable<any> {
-    return this.http.post(baseURL + '/socials', blog)
+  addBlog(blog): Observable<Blog> {
+    return this.http.post<Blog>(baseURL + '/socials', blog)
       .catch(error => this.processHttpmsgService.handleError(error));
   }
 
-  updateBlog(bid: string, blog: any) {
-    return this.http.put(baseURL + '/socials/' + bid , blog)
+  updateBlog(bid: string, blog: any): Observable<Blog> {
+    return this.http.put<Blog>(baseURL + '/socials/' + bid , blog)
       .catch(error => this.processHttpmsgService.handleError(error));
   }
 
-  addComment(bid: string, remark: any) {
+  addComment(bid: string, remark: any): Observable<Blog> {
     console.log('2 bid, remark', bid, remark);
-    return this.http.post(baseURL + '/socials/' + bid + '/comments', remark)
+    return this.http.post<Blog>(baseURL + '/socials/' + bid + '/comments', remark)
       .catch(error => this.processHttpmsgService.handleError(error));
   }
 
-  deleteComment(bid: string, cid: string) {
-    return this.http.delete(baseURL + '/socials/' + bid + '/comments/' + cid)
+  deleteComment(bid: string, cid: string): Observable<Blog> {
+    return this.http.delete<Blog>(baseURL + '/socials/' + bid + '/comments/' + cid)
       .catch(error => this.processHttpmsgService.handleError(error));
   }
 
-  updateComment(bid: string, cid: string, comment: any) {
-    return this.http.put(baseURL + '/socials/' + bid + '/comments/' + cid, comment)
+  updateComment(bid: string, cid: string, comment: any): Observable<Blog> {
+    return this.http.put<Blog>(baseURL + '/socials/' + bid + '/comments/' + cid, comment)
       .catch(error => this.processHttpmsgService.handleError(error));
   }
 
