@@ -17,7 +17,7 @@ const uploadRouter = require('./routes/uploadRouter');
 
 const mongoose = require('mongoose');
 
-const dbURI = config.mongoUrl;
+var dbURI = config.mongoUrl;
 if (process.env.NODE_ENV === "production") {
     dbURI = process.env.MONGODB_URI;
 }
