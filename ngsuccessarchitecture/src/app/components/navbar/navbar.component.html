@@ -39,7 +39,7 @@
         </div>
       </li>
       <li class="nav-item" [routerLinkActive]="['active']"
-      [routerLinkActiveOptions]="{exact: true}">
+      [routerLinkActiveOptions]="{exact: true}" *ngIf="ADMIN">
         <a routerLink="/market" class="nav-link">
           <i class="fas fa-cart-arrow-down"></i> Market
         </a>
@@ -98,7 +98,7 @@
           </a>
       </li>
       <li class="nav-item dropdown" [routerLinkActive]="['active']"
-      [routerLinkActiveOptions]="{exact: true}">
+      [routerLinkActiveOptions]="{exact: true}" *ngIf="ADMIN">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
           <i class="fas fa-globe"></i> Language
         </a>
