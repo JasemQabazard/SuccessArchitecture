@@ -23,23 +23,21 @@ const connect = mongoose.connect(url, { useCreateIndex: true, useNewUrlParser: t
 
 connect.then((db) => {
     console.log("Connected correctly to SuccessArchitecture MONGODB server");
-    console.log("Connect to server via: http://localhost:3000/");
 }, (err) => { console.log(err); });
 
 const app = express();
 
 // Secure traffic only
-// to be done only at the end when we put in production 
-//
-// app.all('*', (req, res, next) => {
-//  if (req.secure) {
-//    return next();
-//  }
-//  else {
-//    res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
-//  }
-//});
-//
+
+app.all('*', (req, res, next) => {
+ if (req.secure) {
+   return next();
+ }
+ else {
+   res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
+ }
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
