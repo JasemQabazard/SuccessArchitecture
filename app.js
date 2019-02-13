@@ -17,9 +17,22 @@ const uploadRouter = require('./routes/uploadRouter');
 
 const mongoose = require('mongoose');
 
+const dbURI = config.mongoUrl;
+if (process.env.NODE_ENV === "production") {
+    dbURI = process.env.MONGODB_URI;
+}
+const connect = mongoose.connect(dbURI, { useCreateIndex: true, useNewUrlParser: true });
+
+// var db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', function () {
+    // we're connected!
+   // console.log(process.env.NODE_ENV);
+    // console.log("Connected correctly to SuccessArchitecture DataBase Sever-------------");
+// });
 // Connection URL
-const url = config.mongoUrl;
-const connect = mongoose.connect(url, { useCreateIndex: true, useNewUrlParser: true });
+// const url = config.mongoUrl;
+// const connect = mongoose.connect(url, { useCreateIndex: true, useNewUrlParser: true });
 
 connect.then((db) => {
     console.log("Connected correctly to SuccessArchitecture MONGODB server");
