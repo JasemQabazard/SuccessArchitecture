@@ -36,22 +36,22 @@ server.on('listening', onListening);
  * Create HTTPS server.
  */ 
  
-var options = {
-  key: fs.readFileSync(__dirname+'/key-20180426-073146.pem'),
-  cert: fs.readFileSync(__dirname+'/cert-20180426-073146.crt')
-};
+// var options = {
+//   key: fs.readFileSync(__dirname+'/key-20180426-073146.pem'),
+//   cert: fs.readFileSync(__dirname+'/cert-20180426-073146.crt')
+// };
 
-var secureServer = https.createServer(options,app);
+// var secureServer = https.createServer(options,app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-secureServer.listen(app.get('secPort'), () => {
-  console.log('Secure Server listening on port ',app.get('secPort'));
-});
-secureServer.on('error', onError);
-secureServer.on('listening', onListening);
+// secureServer.listen(app.get('secPort'), () => {
+//   console.log('Secure Server listening on port ',app.get('secPort'));
+// });
+// secureServer.on('error', onError);
+// secureServer.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.
