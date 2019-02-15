@@ -31,15 +31,15 @@ const app = express();
 
 // Secure traffic only
 
-app.all('*', (req, res, next) => {
-  if (req.secure) {
-    return next();
-  }
-  else {
-    // res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
-    res.redirect(307, 'https://' + req.hostname + req.url);
-  }
- });
+// app.all('*', (req, res, next) => {
+//   if (req.secure) {
+//     return next();
+//   }
+//   else {
+//     // res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
+//     res.redirect('https://' + req.hostname + req.url);
+//   }
+//  });
 
 
 // view engine setup
