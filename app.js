@@ -23,17 +23,6 @@ if (process.env.NODE_ENV === "production") {
 }
 const connect = mongoose.connect(dbURI, { useCreateIndex: true, useNewUrlParser: true });
 
-// var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function () {
-    // we're connected!
-   // console.log(process.env.NODE_ENV);
-    // console.log("Connected correctly to SuccessArchitecture DataBase Sever-------------");
-// });
-// Connection URL
-// const url = config.mongoUrl;
-// const connect = mongoose.connect(url, { useCreateIndex: true, useNewUrlParser: true });
-
 connect.then((db) => {
     console.log("Connected correctly to SuccessArchitecture MONGODB server");
 }, (err) => { console.log(err); });
@@ -42,14 +31,15 @@ const app = express();
 
 // Secure traffic only
 
-// app.all('*', (req, res, next) => {
-//  if (req.secure) {
-//    return next();
-//  }
-//  else {
-//    res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
-//  }
-// });
+app.all('*', (req, res, next) => {
+  if (req.secure) {
+    return next();
+  }
+  else {
+    // res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
+    res.redirect(307, 'https://' + req.hostname + req.url);
+  }
+ });
 
 
 // view engine setup

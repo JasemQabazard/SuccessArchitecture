@@ -37,8 +37,8 @@ server.on('listening', onListening);
  */ 
  
 // var options = {
-//   key: fs.readFileSync(__dirname+'/key-20180426-073146.pem'),
-//   cert: fs.readFileSync(__dirname+'/cert-20180426-073146.crt')
+//   key: fs.readFileSync(__dirname+'/private.key'),
+//   cert: fs.readFileSync(__dirname+'/certificate.pem')
 // };
 
 // var secureServer = https.createServer(options,app);
